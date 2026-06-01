@@ -1,0 +1,115 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-todo: var(--todo);
+  --color-todo-foreground: var(--todo-foreground);
+  --color-progress: var(--progress);
+  --color-progress-foreground: var(--progress-foreground);
+  --color-done: var(--done);
+  --color-done-foreground: var(--done-foreground);
+}
+
+:root {
+  --radius: 0.875rem;
+  --background: oklch(0.18 0.04 280);
+  --foreground: oklch(0.97 0.01 280);
+  --card: oklch(0.23 0.05 280 / 0.7);
+  --card-foreground: oklch(0.97 0.01 280);
+  --popover: oklch(0.22 0.05 280);
+  --popover-foreground: oklch(0.97 0.01 280);
+  --primary: oklch(0.72 0.22 330);
+  --primary-foreground: oklch(0.15 0.04 280);
+  --secondary: oklch(0.3 0.06 280);
+  --secondary-foreground: oklch(0.97 0.01 280);
+  --muted: oklch(0.27 0.04 280);
+  --muted-foreground: oklch(0.72 0.03 280);
+  --accent: oklch(0.7 0.2 200);
+  --accent-foreground: oklch(0.15 0.04 280);
+  --destructive: oklch(0.65 0.24 25);
+  --destructive-foreground: oklch(0.98 0.01 280);
+  --border: oklch(0.35 0.05 280 / 0.6);
+  --input: oklch(0.28 0.05 280);
+  --ring: oklch(0.72 0.22 330);
+
+  --todo: oklch(0.72 0.18 60);
+  --todo-foreground: oklch(0.15 0.04 60);
+  --progress: oklch(0.72 0.2 220);
+  --progress-foreground: oklch(0.15 0.04 220);
+  --done: oklch(0.72 0.2 150);
+  --done-foreground: oklch(0.15 0.04 150);
+
+  --gradient-app: radial-gradient(circle at 15% 10%, oklch(0.35 0.18 320 / 0.5), transparent 50%),
+                  radial-gradient(circle at 85% 20%, oklch(0.35 0.18 200 / 0.45), transparent 55%),
+                  radial-gradient(circle at 50% 90%, oklch(0.32 0.18 280 / 0.5), transparent 55%),
+                  linear-gradient(180deg, oklch(0.16 0.04 280), oklch(0.13 0.04 290));
+  --gradient-primary: linear-gradient(135deg, oklch(0.72 0.22 330), oklch(0.7 0.2 270));
+  --shadow-glow: 0 10px 40px -10px oklch(0.6 0.22 330 / 0.5);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html, body, #root { min-height: 100%; }
+  body {
+    background: var(--gradient-app);
+    background-attachment: fixed;
+    color: var(--color-foreground);
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+}
+
+@layer utilities {
+  .glass {
+    background: oklch(0.25 0.05 280 / 0.55);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid oklch(1 0 0 / 0.08);
+  }
+  .gradient-text {
+    background: linear-gradient(135deg, oklch(0.85 0.2 330), oklch(0.8 0.2 220));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .btn-primary {
+    background: var(--gradient-primary);
+    color: var(--primary-foreground);
+    box-shadow: var(--shadow-glow);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+  }
+  .btn-primary:hover { transform: translateY(-1px); filter: brightness(1.08); }
+  .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+.animate-fade-up { animation: fadeUp 0.35s ease-out both; }
